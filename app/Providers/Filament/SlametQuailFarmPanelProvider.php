@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\Login;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -27,7 +28,8 @@ class SlametQuailFarmPanelProvider extends PanelProvider
             ->default()
             ->id('slamet_quail_farm')
             ->path('slamet_quail_farm')
-            ->login(\App\Filament\Pages\Auth\Login::class)
+            
+            ->login(Login::class)
             ->authGuard('web')
             ->colors([
                 'primary' => Color::Amber,
