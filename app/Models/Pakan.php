@@ -10,5 +10,10 @@ class Pakan extends Model
     protected $primaryKey = 'id_pakan';
     public $timestamps = false;
 
-    protected $fillable = ['tanggal', 'jumlah_pakan', 'penggunaan_pakan', 'sisa_pakan'];
+    protected $fillable = ['tanggal', 'konsumsi_pakan', 'pemberian_pakan', 'sisa_pakan', 'kandang_id'];
+
+    public function kandang()
+    {
+        return $this->belongsTo(Kandang::class, 'kandang_id', 'id_kandang');
+    }
 }

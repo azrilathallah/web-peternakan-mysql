@@ -14,6 +14,9 @@ class MortalitasTable
     {
         return $table
             ->columns([
+                TextColumn::make('kandang.lokasi')
+                    ->label('Kandang')
+                    ->sortable(),
                 TextColumn::make('tanggal')
                     ->date()
                     ->sortable(),

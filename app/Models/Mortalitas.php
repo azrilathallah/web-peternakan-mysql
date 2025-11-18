@@ -10,5 +10,10 @@ class Mortalitas extends Model
     protected $primaryKey = 'id_mortalitas';
     public $timestamps = false;
 
-    protected $fillable = ['tanggal', 'jumlah_mati', 'penyebab'];
+    protected $fillable = ['tanggal', 'jumlah_mati', 'penyebab', 'kandang_id'];
+
+    public function kandang()
+    {
+        return $this->belongsTo(Kandang::class, 'kandang_id', 'id_kandang');
+    }
 }

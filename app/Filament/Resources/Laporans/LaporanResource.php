@@ -18,7 +18,7 @@ class LaporanResource extends Resource
 {
     protected static ?string $model = Laporan::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::Printer;
 
     public static function form(Schema $schema): Schema
     {

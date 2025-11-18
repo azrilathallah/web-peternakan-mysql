@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Kandangs\Schemas;
 
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -12,9 +11,6 @@ class KandangForm
     {
         return $schema
             ->components([
-                Select::make('lokasi')
-                    ->options(['Kandang_Atas' => 'Kandang  atas', 'Kandang_Bawah' => 'Kandang  bawah'])
-                    ->required(),
                 TextInput::make('kapasitas')
                     ->required()
                     ->numeric(),

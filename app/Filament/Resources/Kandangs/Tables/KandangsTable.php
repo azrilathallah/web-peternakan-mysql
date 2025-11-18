@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Kandangs\Tables;
 
 use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -15,7 +14,7 @@ class KandangsTable
         return $table
             ->columns([
                 TextColumn::make('lokasi')
-                    ->badge(),
+                    ->sortable(),
                 TextColumn::make('kapasitas')
                     ->numeric()
                     ->sortable(),
@@ -30,9 +29,7 @@ class KandangsTable
                 EditAction::make(),
             ])
             ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
+                BulkActionGroup::make([]),
             ]);
     }
 }

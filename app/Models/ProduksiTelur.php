@@ -10,5 +10,10 @@ class ProduksiTelur extends Model
     protected $primaryKey = 'id_produksi';
     public $timestamps = false;
 
-    protected $fillable = ['tanggal', 'jumlah_telur'];
+    protected $fillable = ['tanggal', 'jumlah_telur', 'kandang_id'];
+
+    public function kandang()
+    {
+        return $this->belongsTo(Kandang::class, 'kandang_id', 'id_kandang');
+    }
 }

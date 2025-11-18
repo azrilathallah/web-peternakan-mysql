@@ -28,7 +28,6 @@ class SlametQuailFarmPanelProvider extends PanelProvider
             ->default()
             ->id('slamet_quail_farm')
             ->path('slamet_quail_farm')
-            
             ->login(Login::class)
             ->authGuard('web')
             ->colors([

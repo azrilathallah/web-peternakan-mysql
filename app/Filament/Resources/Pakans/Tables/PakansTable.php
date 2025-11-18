@@ -14,16 +14,19 @@ class PakansTable
     {
         return $table
             ->columns([
+                TextColumn::make('kandang.lokasi')
+                    ->label('Kandang')
+                    ->sortable(),
                 TextColumn::make('tanggal')
                     ->date()
                     ->sortable(),
-                TextColumn::make('jumlah_pakan')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('penggunaan_pakan')
+                TextColumn::make('pemberian_pakan')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('sisa_pakan')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('konsumsi_pakan')
                     ->numeric()
                     ->sortable(),
             ])
