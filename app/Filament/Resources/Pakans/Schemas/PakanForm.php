@@ -20,9 +20,11 @@ class PakanForm
                 DatePicker::make('tanggal')
                     ->required(),
                 TextInput::make('pemberian_pakan')
+                    ->label('Pemberian Pakan')
                     ->required()
                     ->numeric(),
                 TextInput::make('sisa_pakan')
+                    ->label('Sisa Pakan')
                     ->required()
                     ->numeric(),
             ]);

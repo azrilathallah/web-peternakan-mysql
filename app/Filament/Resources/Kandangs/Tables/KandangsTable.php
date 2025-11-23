@@ -18,7 +18,8 @@ class KandangsTable
                 TextColumn::make('kapasitas')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('populasi')
+                TextColumn::make('jumlah_puyuh')
+                    ->label('Jumlah Puyuh')
                     ->numeric()
                     ->sortable(),
             ])

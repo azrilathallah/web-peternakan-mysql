@@ -15,14 +15,22 @@ class ProduksiTelurForm
             ->components([
                 Select::make('kandang_id')
                     ->label('Kandang')
-                    ->relationship('kandang', 'lokasi') 
+                    ->relationship('kandang', 'lokasi')
                     ->required(),
                 DatePicker::make('tanggal')
                     ->required(),
-                TextInput::make('jumlah_telur')
-                    ->tel()
-                    ->required()
-                    ->numeric(),
+                TextInput::make('telur_ok')
+                    ->label('Telur OK')
+                    ->numeric()
+                    ->required(),
+                TextInput::make('telur_bs')
+                    ->label('Telur BS')
+                    ->numeric()
+                    ->required(),
+                TextInput::make('berat')
+                    ->label('Berat (kg)')
+                    ->numeric()
+                    ->required(),
             ]);
     }
 }

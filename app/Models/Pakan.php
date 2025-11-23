@@ -16,4 +16,19 @@ class Pakan extends Model
     {
         return $this->belongsTo(Kandang::class, 'kandang_id', 'id_kandang');
     }
+
+    protected static function booted()
+    {
+        static::saving(function ($pakan) {
+            $jumlah_puyuh = $pakan->kandang->jumlah_puyuh ?? 0;
+
+            $selisih = $pakan->pemberian_pakan - $pakan->sisa_pakan;
+
+            if ($jumlah_puyuh > 0) {
+                $pakan->konsumsi_pakan = $selisih / $jumlah_puyuh;
+            } else {
+                $pakan->konsumsi_pakan = 0;
+            }
+        });
+    }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_kandang');
             $table->enum('lokasi', ['Kandang Atas', 'Kandang Bawah']);
             $table->integer('kapasitas');
-            $table->integer('populasi');
+            $table->integer('jumlah_puyuh');
         });
     }
 

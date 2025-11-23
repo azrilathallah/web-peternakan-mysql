@@ -14,7 +14,7 @@ class KandangForm
                 TextInput::make('kapasitas')
                     ->required()
                     ->numeric(),
-                TextInput::make('populasi')
+                TextInput::make('jumlah_puyuh')
                     ->required()
                     ->numeric(),
             ]);

@@ -16,4 +16,36 @@ class Mortalitas extends Model
     {
         return $this->belongsTo(Kandang::class, 'kandang_id', 'id_kandang');
     }
+
+    protected static function booted()
+    {
+        static::created(function ($mortalitas) {
+            $kandang = $mortalitas->kandang;
+
+            if ($kandang) {
+                $kandang->jumlah_puyuh = max(0, $kandang->jumlah_puyuh - $mortalitas->jumlah_mati);
+                $kandang->save();
+            }
+        });
+
+        static::updated(function ($mortalitas) {
+            $kandang = $mortalitas->kandang;
+
+            if ($kandang) {
+                $difference = $mortalitas->jumlah_mati - $mortalitas->getOriginal('jumlah_mati');
+
+                $kandang->jumlah_puyuh = max(0, $kandang->jumlah_puyuh - $difference);
+                $kandang->save();
+            }
+        });
+
+        static::deleted(function ($mortalitas) {
+            $kandang = $mortalitas->kandang;
+
+            if ($kandang) {
+                $kandang->jumlah_puyuh += $mortalitas->jumlah_mati;
+                $kandang->save();
+            }
+        });
+    }
 }

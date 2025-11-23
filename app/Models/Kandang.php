@@ -10,5 +10,5 @@ class Kandang extends Model
     protected $primaryKey = 'id_kandang';
     public $timestamps = false;
 
-    protected $fillable = ['lokasi', 'kapasitas', 'populasi'];
+    protected $fillable = ['lokasi', 'kapasitas', 'jumlah_puyuh'];
 }

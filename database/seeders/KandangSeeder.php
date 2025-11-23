@@ -17,13 +17,13 @@ class KandangSeeder extends Seeder
             Kandang::create([
                 'lokasi' => 'Kandang Atas',
                 'kapasitas' => 0,
-                'populasi' => 0,
+                'jumlah_puyuh' => 0,
             ]);
 
             Kandang::create([
                 'lokasi' => 'Kandang Bawah',
                 'kapasitas' => 0,
-                'populasi' => 0,
+                'jumlah_puyuh' => 0,
             ]);
         }
     }

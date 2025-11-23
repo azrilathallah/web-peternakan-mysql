@@ -20,6 +20,7 @@ class MortalitasForm
                 DatePicker::make('tanggal')
                     ->required(),
                 TextInput::make('jumlah_mati')
+                    ->label('Jumlah Mati')
                     ->required()
                     ->numeric(),
                 TextInput::make('penyebab')

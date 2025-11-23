@@ -14,7 +14,11 @@ return new class extends Migration
         Schema::create('produksi_telur', function (Blueprint $table) {
             $table->id('id_produksi');
             $table->date('tanggal');
-            $table->integer('jumlah_telur');
+            $table->integer('telur_ok')->default(0);
+            $table->integer('telur_bs')->default(0);
+            $table->integer('total_telur')->default(0);
+            $table->float('berat')->default(0);
+            $table->float('rata_rata')->default(0);
             $table->foreignId('kandang_id')
                 ->constrained(table: 'kandang', column: 'id_kandang')
                 ->cascadeOnDelete();
