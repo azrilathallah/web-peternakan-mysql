@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kandang', function (Blueprint $table) {
-            $table->integer('id_kandang', true);
-            $table->enum('lokasi', ['Kandang_Atas', 'Kandang_Bawah']);
+            $table->id('id_kandang');
+            $table->enum('lokasi', ['Kandang Atas', 'Kandang Bawah']);
             $table->integer('kapasitas');
-            $table->integer('populasi');
+            $table->integer('jumlah_puyuh');
         });
     }
 

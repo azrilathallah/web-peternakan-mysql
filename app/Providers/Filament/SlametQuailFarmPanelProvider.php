@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\Login;
+use App\Filament\Widgets\StatsOverview;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -28,7 +29,6 @@ class SlametQuailFarmPanelProvider extends PanelProvider
             ->default()
             ->id('slamet_quail_farm')
             ->path('slamet_quail_farm')
-            
             ->login(Login::class)
             ->authGuard('web')
             ->colors([
@@ -41,8 +41,8 @@ class SlametQuailFarmPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
+                StatsOverview::class,
+                // AccountWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

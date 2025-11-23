@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Mortalitas\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
@@ -14,20 +15,25 @@ class MortalitasTable
     {
         return $table
             ->columns([
+                TextColumn::make('kandang.lokasi')
+                    ->label('Kandang')
+                    ->sortable(),
                 TextColumn::make('tanggal')
                     ->date()
                     ->sortable(),
                 TextColumn::make('jumlah_mati')
+                    ->label('Jumlah Mati')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('penyebab')
-                    ->searchable(),
+                    ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->recordActions([
                 EditAction::make(),
+                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

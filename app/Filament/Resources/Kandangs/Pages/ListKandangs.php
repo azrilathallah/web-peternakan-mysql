@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Kandangs\Pages;
 
 use App\Filament\Resources\Kandangs\KandangResource;
-use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListKandangs extends ListRecords
@@ -12,8 +11,6 @@ class ListKandangs extends ListRecords
 
     protected function getHeaderActions(): array
     {
-        return [
-            CreateAction::make(),
-        ];
+        return [];
     }
 }

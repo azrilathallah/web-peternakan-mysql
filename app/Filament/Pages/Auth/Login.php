@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages\Auth;
 
+use App\Models\Karyawan;
 use Filament\Auth\Pages\Login as BaseLogin;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Component;
@@ -40,7 +41,7 @@ class Login extends BaseLogin
     protected function throwFailureValidationException(): never
     {
         $username = $this->form->getState()['username'] ?? null;
-        $user = \App\Models\Karyawan::where('username', $username)->first();
+        $user = Karyawan::where('username', $username)->first();
 
         if (! $user) {
             throw ValidationException::withMessages([
