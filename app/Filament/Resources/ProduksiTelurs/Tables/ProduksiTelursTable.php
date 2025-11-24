@@ -17,9 +17,14 @@ class ProduksiTelursTable
             ->columns([
                 TextColumn::make('kandang.lokasi')
                     ->label('Kandang')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'Kandang Atas' => 'success',
+                        'Kandang Bawah' => 'info',
+                    })
                     ->sortable(),
                 TextColumn::make('tanggal')
-                    ->date()
+                    ->dateTime('d/m/Y')
                     ->sortable(),
                 TextColumn::make('telur_ok')
                     ->label('Telur OK')
@@ -47,7 +52,7 @@ class ProduksiTelursTable
             ])
             ->recordActions([
                 EditAction::make(),
-                DeleteAction    ::make(),
+                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

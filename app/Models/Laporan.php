@@ -8,7 +8,13 @@ class Laporan extends Model
 {
     protected $table = 'laporan';
     protected $primaryKey = 'id_laporan';
-    public $timestamps = false;
 
-    protected $fillable = ['periode'];
+    protected $fillable = [
+        'periode',
+        'data_laporan',
+    ];
+
+    protected $casts = [
+        'data_laporan' => 'array',
+    ];
 }

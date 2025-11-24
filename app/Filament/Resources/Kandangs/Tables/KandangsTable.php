@@ -14,6 +14,11 @@ class KandangsTable
         return $table
             ->columns([
                 TextColumn::make('lokasi')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'Kandang Atas' => 'success',
+                        'Kandang Bawah' => 'info',
+                    })
                     ->sortable(),
                 TextColumn::make('kapasitas')
                     ->numeric()

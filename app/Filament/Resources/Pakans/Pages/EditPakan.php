@@ -16,4 +16,9 @@ class EditPakan extends EditRecord
             DeleteAction::make(),
         ];
     }
+
+    public function getTitle(): string
+    {
+        return 'Ubah Data Pakan';
+    }
 }

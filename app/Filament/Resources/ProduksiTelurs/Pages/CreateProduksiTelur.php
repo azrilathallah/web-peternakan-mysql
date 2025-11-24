@@ -8,4 +8,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateProduksiTelur extends CreateRecord
 {
     protected static string $resource = ProduksiTelurResource::class;
+
+    public function getTitle(): string
+    {
+        return 'Tambah Data Produksi Telur';
+    }
 }

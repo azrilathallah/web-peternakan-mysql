@@ -8,4 +8,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateMortalitas extends CreateRecord
 {
     protected static string $resource = MortalitasResource::class;
+
+    public function getTitle(): string
+    {
+        return 'Tambah Data Mortalitas';
+    }
 }

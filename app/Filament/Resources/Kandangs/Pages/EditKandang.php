@@ -10,8 +10,8 @@ class EditKandang extends EditRecord
 {
     protected static string $resource = KandangResource::class;
 
-    protected function getHeaderActions(): array
+    public function getTitle(): string
     {
-        return [];
+        return 'Ubah Data Kandang';
     }
 }

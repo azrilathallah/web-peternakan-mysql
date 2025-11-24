@@ -17,9 +17,14 @@ class MortalitasTable
             ->columns([
                 TextColumn::make('kandang.lokasi')
                     ->label('Kandang')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'Kandang Atas' => 'success',
+                        'Kandang Bawah' => 'info',
+                    })
                     ->sortable(),
                 TextColumn::make('tanggal')
-                    ->date()
+                    ->dateTime('d/m/Y')
                     ->sortable(),
                 TextColumn::make('jumlah_mati')
                     ->label('Jumlah Mati')
