@@ -2,9 +2,12 @@
 
 namespace App\Filament\Resources\Laporans\Tables;
 
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -15,13 +18,25 @@ class LaporansTable
         return $table
             ->columns([
                 TextColumn::make('periode')
-                    ->badge(),
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'Harian' => 'success',
+                        'Mingguan' => 'info',
+                        'Bulanan' => 'danger',
+                    }),
+                TextColumn::make('created_at')
+                    ->label('Dibuat Pada')
+                    ->dateTime('d/m/Y H:i'),
             ])
             ->filters([
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                Action::make('download')
+                    ->label('Download')
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->url(fn($record) => route('laporan.download', $record)),
+                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

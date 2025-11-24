@@ -16,4 +16,9 @@ class EditProduksiTelur extends EditRecord
             DeleteAction::make(),
         ];
     }
+
+    public function getTitle(): string
+    {
+        return 'Ubah Data Produksi Telur';
+    }
 }

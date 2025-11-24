@@ -17,20 +17,25 @@ class PakansTable
             ->columns([
                 TextColumn::make('kandang.lokasi')
                     ->label('Kandang')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'Kandang Atas' => 'success',
+                        'Kandang Bawah' => 'info',
+                    })
                     ->sortable(),
                 TextColumn::make('tanggal')
-                    ->date()
+                    ->dateTime('d/m/Y')
                     ->sortable(),
                 TextColumn::make('pemberian_pakan')
-                    ->label('Pemberian Pakan')
+                    ->label('Pemberian Pakan (gr)')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('sisa_pakan')
-                    ->label('Sisa Pakan')
+                    ->label('Sisa Pakan (gr)')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('konsumsi_pakan')
-                    ->label('Konsumsi Pakan')
+                    ->label('Konsumsi Pakan (gr)')
                     ->numeric()
                     ->sortable(),
             ])

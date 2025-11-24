@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('laporan', function (Blueprint $table) {
             $table->id('id_laporan');
             $table->enum('periode', ['Harian', 'Mingguan', 'Bulanan', '']);
+            $table->json('data_laporan');
+            $table->timestamps();
         });
     }
 
