@@ -19,7 +19,7 @@ class PakanChart extends ChartWidget
         $data = Pakan::select(
                 'tanggal',
                 DB::raw('SUM(konsumsi_pakan) as total_konsumsi'),
-                DB::raw('COUNT(DISTINCT kandang_id) as jumlah_kandang')
+                // DB::raw('COUNT(DISTINCT kandang_id) as jumlah_kandang')
             )
             ->where('tanggal', '>=', $startDate)
             ->groupBy('tanggal')

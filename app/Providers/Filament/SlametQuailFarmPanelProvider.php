@@ -12,8 +12,6 @@ use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -29,6 +27,7 @@ class SlametQuailFarmPanelProvider extends PanelProvider
             ->default()
             ->id('slamet_quail_farm')
             ->path('slamet_quail_farm')
+            ->brandName('Slamet Quail Farm')
             ->login(Login::class)
             ->authGuard('web')
             ->colors([
