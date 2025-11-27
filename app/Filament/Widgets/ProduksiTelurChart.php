@@ -26,7 +26,6 @@ class ProduksiTelurChart extends ChartWidget
             ->orderBy('tanggal')
             ->get();
 
-
         return [
             'datasets' => [
                 [

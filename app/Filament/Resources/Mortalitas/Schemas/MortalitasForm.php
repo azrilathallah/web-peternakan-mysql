@@ -27,9 +27,4 @@ class MortalitasForm
                     ->required(),
             ]);
     }
-
-    protected function getTitle(): string
-    {
-        return 'Tambah Data Mortalitas';
-    }
 }
