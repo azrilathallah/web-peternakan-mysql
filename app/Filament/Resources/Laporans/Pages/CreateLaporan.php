@@ -22,7 +22,7 @@ class CreateLaporan extends CreateRecord
     {
         // Generate data laporan
         $laporanData = $this->collectReportData($data);
-        
+
         // Simpan data ke database
         return [
             'periode' => $data['jenis_laporan'],
@@ -35,7 +35,7 @@ class CreateLaporan extends CreateRecord
         // Generate PDF dan simpan ke storage sementara
         $data = $this->form->getState();
         $laporanData = $this->collectReportData($data);
-        
+
         $pdf = Pdf::loadView('filament.pages.laporan', $laporanData)
             ->setPaper('a4', 'portrait')
             ->setOptions([
@@ -45,11 +45,11 @@ class CreateLaporan extends CreateRecord
             ]);
 
         $filename = 'Laporan_' . str_replace(' ', '_', $laporanData['periode']) . '_' . now()->format('Y-m-d_H-i') . '.pdf';
-        
+
         // Simpan PDF ke storage sementara
         $path = 'temp/' . $filename;
         Storage::disk('public')->put($path, $pdf->output());
-        
+
         // Generate URL untuk download
         $downloadUrl = Storage::url($path);
 
@@ -76,7 +76,7 @@ class CreateLaporan extends CreateRecord
     private function collectReportData(array $filters): array
     {
         $dateRange = $this->getDateRange($filters);
-        
+
         $data = [
             'periode' => $this->getPeriodeLabel($filters),
             'tanggal_cetak' => now()->format('d/m/Y H:i'),
@@ -87,16 +87,16 @@ class CreateLaporan extends CreateRecord
 
         // Data Kandang
         $data['kandang'] = $this->getKandangData($filters['kandang'] ?? []);
-        
+
         // Data Produksi Telur
         $data['produksi'] = $this->getProduksiData($dateRange, $filters['kandang'] ?? []);
-        
+
         // Data Mortalitas
         $data['mortalitas'] = $this->getMortalitasData($dateRange, $filters['kandang'] ?? []);
-        
+
         // Data Pakan
         $data['pakan'] = $this->getPakanData($dateRange, $filters['kandang'] ?? []);
-        
+
         // Ringkasan Performa
         $data['ringkasan'] = $this->getRingkasanData($data);
 
@@ -106,30 +106,30 @@ class CreateLaporan extends CreateRecord
     private function getDateRange(array $filters): array
     {
         $jenis = $filters['jenis_laporan'];
-        
+
         switch ($jenis) {
             case 'harian':
                 $start = Carbon::parse($filters['tanggal']);
                 $end = $start->copy();
                 break;
-                
+
             case 'mingguan':
                 $start = Carbon::parse($filters['minggu'])->startOfWeek();
                 $end = $start->copy()->endOfWeek();
                 break;
-                
+
             case 'bulanan':
                 $tahun = $filters['tahun'] ?? now()->year;
                 $bulan = $filters['bulan'] ?? now()->month;
                 $start = Carbon::create($tahun, $bulan, 1);
                 $end = $start->copy()->endOfMonth();
                 break;
-                
+
             default:
                 $start = now();
                 $end = now();
         }
-        
+
         return [
             'start' => $start->format('Y-m-d'),
             'end' => $end->format('Y-m-d'),
@@ -152,18 +152,18 @@ class CreateLaporan extends CreateRecord
                 $bulan = $filters['bulan'] ?? now()->month;
                 return Carbon::create()->month($bulan)->translatedFormat('F') . ' ' . $tahun;
         }
-        
+
         return '';
     }
 
     private function getKandangData(array $kandangFilter)
     {
         $query = Kandang::query();
-        
+
         if (!empty($kandangFilter)) {
             $query->whereIn('id_kandang', $kandangFilter);
         }
-        
+
         return $query->get();
     }
 
@@ -171,11 +171,11 @@ class CreateLaporan extends CreateRecord
     {
         $query = ProduksiTelur::with('kandang')
             ->whereBetween('tanggal', [$dateRange['start'], $dateRange['end']]);
-            
+
         if (!empty($kandangFilter)) {
             $query->whereIn('kandang_id', $kandangFilter);
         }
-        
+
         return $query->get()->groupBy('tanggal');
     }
 
@@ -183,11 +183,11 @@ class CreateLaporan extends CreateRecord
     {
         $query = Mortalitas::with('kandang')
             ->whereBetween('tanggal', [$dateRange['start'], $dateRange['end']]);
-            
+
         if (!empty($kandangFilter)) {
             $query->whereIn('kandang_id', $kandangFilter);
         }
-        
+
         return $query->get()->groupBy('tanggal');
     }
 
@@ -195,58 +195,58 @@ class CreateLaporan extends CreateRecord
     {
         $query = Pakan::with('kandang')
             ->whereBetween('tanggal', [$dateRange['start'], $dateRange['end']]);
-            
+
         if (!empty($kandangFilter)) {
             $query->whereIn('kandang_id', $kandangFilter);
         }
-        
+
         return $query->get()->groupBy('tanggal');
     }
 
     private function getRingkasanData(array $reportData)
-{
-    $totalProduksi = 0;
-    $totalMortalitas = 0;
-    $totalPakan = 0;
+    {
+        $totalProduksi = 0;
+        $totalMortalitas = 0;
+        $totalPakan = 0;
 
-    // Hitung total produksi
-    if (!empty($reportData['produksi'])) {
-        foreach ($reportData['produksi'] as $tanggal => $produksi) {
-            foreach ($produksi as $item) {
-                $totalProduksi += $item->total_telur;
+        // Hitung total produksi
+        if (!empty($reportData['produksi'])) {
+            foreach ($reportData['produksi'] as $tanggal => $produksi) {
+                foreach ($produksi as $item) {
+                    $totalProduksi += $item->total_telur;
+                }
             }
         }
-    }
 
-    // Hitung total mortalitas
-    if (!empty($reportData['mortalitas'])) {
-        foreach ($reportData['mortalitas'] as $tanggal => $mortalitas) {
-            foreach ($mortalitas as $item) {
-                $totalMortalitas += $item->jumlah_mati;
+        // Hitung total mortalitas
+        if (!empty($reportData['mortalitas'])) {
+            foreach ($reportData['mortalitas'] as $tanggal => $mortalitas) {
+                foreach ($mortalitas as $item) {
+                    $totalMortalitas += $item->jumlah_mati;
+                }
             }
         }
-    }
 
-    // Hitung total pakan
-    if (!empty($reportData['pakan'])) {
-        foreach ($reportData['pakan'] as $tanggal => $pakan) {
-            foreach ($pakan as $item) {
-                $totalPakan += $item->konsumsi_pakan;
+        // Hitung total pakan
+        if (!empty($reportData['pakan'])) {
+            foreach ($reportData['pakan'] as $tanggal => $pakan) {
+                foreach ($pakan as $item) {
+                    $totalPakan += $item->konsumsi_pakan;
+                }
             }
         }
-    }
 
-    // Hitung total populasi dari data kandang
-    $totalPopulasi = 0;
-    if (!empty($reportData['kandang'])) {
-        $totalPopulasi = $reportData['kandang']->sum('jumlah_puyuh');
-    }
+        // Hitung total populasi dari data kandang
+        $totalPopulasi = 0;
+        if (!empty($reportData['kandang'])) {
+            $totalPopulasi = $reportData['kandang']->sum('jumlah_puyuh');
+        }
 
-    return [
-        'total_produksi' => $totalProduksi,
-        'total_mortalitas' => $totalMortalitas,
-        'total_pakan' => $totalPakan,
-        'total_populasi' => $totalPopulasi,
-    ];
-}
+        return [
+            'total_produksi' => $totalProduksi,
+            'total_mortalitas' => $totalMortalitas,
+            'total_pakan' => $totalPakan,
+            'total_populasi' => $totalPopulasi,
+        ];
+    }
 }

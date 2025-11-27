@@ -36,7 +36,6 @@
     <div class="section">
         <div class="section-title">INFORMASI KANDANG</div>
         <div class="kandang-info">
-            <strong>Total Kandang:</strong> {{ is_array($kandang) ? count($kandang) : $kandang->count() }} |
             <strong>Total Populasi:</strong> {{ number_format($ringkasan['total_populasi']) }} ekor |
             <strong>Kandang Dipilih:</strong> 
             @if(empty($filters['kandang']))
