@@ -86,8 +86,8 @@ class StatsOverview extends StatsOverviewWidget
                     'class' => 'cursor-pointer',
                 ]),
 
-            Stat::make('Konsumsi Pakan Hari Ini', Number::format($pakanHari, ) . ' gr')
-                ->description(Number::format($pakanPerEkor, 2) . ' gr/ekor ')
+            Stat::make('Konsumsi Pakan Hari Ini', Number::format($pakanHari, 3) . ' gr')
+                ->description(Number::format($pakanPerEkor, 4) . ' gr/ekor ')
                 ->descriptionIcon('heroicon-o-cube')
                 ->color('info')
                 ->chart($this->getWeeklyPakanData())

@@ -57,12 +57,10 @@ class LaporanForm
                             ->visible(fn($get) => $get('jenis_laporan') === 'bulanan')
                             ->default(now()->month),
 
-
                         CheckboxList::make('kandang')
                             ->options(Kandang::pluck('lokasi', 'id_kandang'))
                             ->columns(2)
                             ->label('Pilih Kandang (kosongkan untuk semua)'),
-
                     ])
             ]);
     }
