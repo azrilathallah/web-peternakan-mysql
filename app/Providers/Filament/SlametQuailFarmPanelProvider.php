@@ -28,10 +28,12 @@ class SlametQuailFarmPanelProvider extends PanelProvider
             ->id('slamet_quail_farm')
             ->path('slamet_quail_farm')
             ->brandName('Slamet Quail Farm')
+            ->brandLogo(asset('images/logo.png'))
+            ->brandLogoHeight('3rem')
             ->login(Login::class)
             ->authGuard('web')
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Green,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
