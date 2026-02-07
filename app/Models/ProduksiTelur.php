@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ProduksiTelur extends Model
 {
+    use HasFactory;
     protected $table = 'produksi_telur';
     protected $primaryKey = 'id_produksi';
     public $timestamps = false;

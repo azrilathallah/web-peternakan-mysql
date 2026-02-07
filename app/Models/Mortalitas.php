@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Mortalitas extends Model
 {
+    use HasFactory;
     protected $table = 'mortalitas';
     protected $primaryKey = 'id_mortalitas';
     public $timestamps = false;
